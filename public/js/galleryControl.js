@@ -80,7 +80,13 @@ angular
 
      	$scope.getAlbum = function(){
 			$http.get("http://"+host_ip+":8044/album/getAlbums").then(function (response) {
-				$scope.albumList = response.data.data.albums;
+				var rst = response.data.data.albums;
+				$scope.albumList = new Array();
+				for(var i in rst){
+					if(rst.albumName != "upload"){
+						$scope.albumList.push(rst[i]);
+						}
+					}
 				$scope.refresh($scope.albumList[0]);
 				});			
     		}
