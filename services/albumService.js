@@ -176,7 +176,7 @@ service.uploading = function(req, res){
 	var orgFilename = req.body.file.name;
 	var savedFileName = orgFilename;
 	var dstPath = './public/files/'+ savedFileName;
-	var server = '127.0.0.1:8044';
+	var server = '119.29.92.190:8044';
 	var fileUrl = server+dstPath;
 	//重命名为真实文件名
 	fs.rename(uploadedPath, dstPath,function(err){
