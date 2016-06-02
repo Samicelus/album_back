@@ -83,7 +83,7 @@ angular
 				var rst = response.data.data.albums;
 				$scope.albumList = new Array();
 				for(var i in rst){
-					if(rst.albumName != "upload"){
+					if(rst[i].albumName != "upload"){
 						$scope.albumList.push(rst[i]);
 						}
 					}
