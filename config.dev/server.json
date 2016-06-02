@@ -1,0 +1,13 @@
+{
+  "port":8044,
+  "jwtSecret": "@#$TYHBVGHJIY^TWEYKJHNBGFDWGHJKUYTWE#$%^&*&^%$#",
+  "need_encrypt":false,
+  "whiteList": ["/","/login","/user/login","/user/register","/article/readSquare","/article/getList","/article/read/*","/wechat/responseMsg"],
+  "passportUrlPrefix": "http://192.168.0.4/rest/v1/",
+  "php_base_url": "http://121.40.190.5:8082/groups_encrypt/services/rest",
+  "tsb_im_url": "http://121.40.190.5:8001",
+  "car_permission": {
+  	"allowToVisit": ["561f778a519caf575646edbf", "561f7789519caf575646eba3"],
+  	"allowToCar": ["5650437ce55baafc4e8b48e5", "561f778d519caf575646f3b2", "561f778d519caf575646f386", "561f778c519caf575646f24b", "561f778b519caf575646f018", "561f778b519caf575646eedc", "561f7789519caf575646ecb9"]
+  }
+}
