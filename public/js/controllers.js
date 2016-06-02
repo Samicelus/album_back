@@ -7,7 +7,9 @@ angular
     .module('app', ['angularFileUpload','ngAnimate','ui.bootstrap'])
 
 
-    .controller('AppController', ['$scope','FileUploader','$http', function($scope, FileUploader,$http) {
+    .controller('AppController', ['$scope','FileUploader','$http','$timeout', function($scope, FileUploader,$http, $timeout) {
+    	$scope.deleteSuccess = false;
+		$scope.deleteFail = false;
     	$scope.images = new Array();
     	$scope.refresh = function(albumName){
     		$scope.getAlbum();
@@ -28,6 +30,7 @@ angular
     	
      	
     	$scope.addAlbum = function(albumName){
+    		$scope.addedAlbumName = "";
  			$http({
 				method:'post',
 				url:'http://127.0.0.1:8044/album/addAlbum',
@@ -36,14 +39,43 @@ angular
 					$scope.getAlbum();
 					});   		
     	}
-
+    	
+		$scope.deleteAlbum = function(albumName){
+ 			$http({
+				method:'post',
+				url:'http://127.0.0.1:8044/album/deleteAlbum',
+				data:{albumName:albumName}
+				}).success(function(res){
+					$scope.getAlbum();
+					if(res.result == "FALSE"){
+						$scope.deleteAlbumInfo = res.msg;
+						$scope.deleteSuccess = false;
+						$scope.deleteFail = true;
+						var timer = $timeout(function(){
+							$scope.deleteFail = false;
+							$timeout.cancel(timer);
+							},3000);
+						}else{
+							$scope.deleteAlbumInfo = res.data;
+							$scope.deleteSuccess = true;
+							$scope.deleteFail = false;
+							var timer = $timeout(function(){
+								$scope.deleteSuccess = false;
+								$timeout.cancel(timer);
+								},1000);
+							}
+					
+					});   		
+    	}
+		
      	$scope.toggle = function(x){
 			x.width = x.width==100?400:100;
     		}
 
      	$scope.getAlbum = function(){
 			$http.get("http://localhost:8044/album/getAlbums").then(function (response) {
-				$scope.albumList = response.data.data;
+				$scope.albumList = response.data.data.albums;
+				console.info($scope.albumList);
 				});			
     		}
 
@@ -53,7 +85,6 @@ angular
 				url:'http://127.0.0.1:8044/album/addImageToAlbum',
 				data:{img_id:id ,album:albumName}
 				}).success(function(res){
-					$scope.refresh(albumName);
 					console.info(res);
 					});
     		}

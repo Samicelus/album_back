@@ -53,7 +53,7 @@ angular
     		}
 
      	$scope.pre = function(){
-     		if($scope.carouselLen != 0){
+     		if($scope.carouselLen > 1){
 	     		$scope.index = $scope.index != 0?$scope.index-1:0;
 				$scope.images[$scope.index+1].childrenWidth = "100%";
 	     		$scope.images[$scope.index+1].marginTop = "0px";
@@ -66,7 +66,7 @@ angular
     		}
 
      	$scope.next = function(){
-     		if($scope.carouselLen != 0){
+     		if($scope.carouselLen > 1){
 	      		$scope.index = ($scope.index != ($scope.carouselLen-1))?$scope.index+1:$scope.carouselLen-1;
 	     		$scope.images[$scope.index-1].childrenWidth = "100%";
 	     		$scope.images[$scope.index-1].marginTop = "0px";
@@ -80,7 +80,7 @@ angular
 
      	$scope.getAlbum = function(){
 			$http.get("http://localhost:8044/album/getAlbums").then(function (response) {
-				$scope.albumList = response.data.data;
+				$scope.albumList = response.data.data.albums;
 				$scope.refresh($scope.albumList[0]);
 				});			
     		}

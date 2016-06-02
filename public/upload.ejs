@@ -145,16 +145,18 @@
 					    </uib-accordion-heading>
 				    <div class="col-md-12">
 				    	选择专辑:
-						<select class="form-control" ng-model="albumSelected" ng-click="getAlbum()" style="width: 20%;display: inline;">
+						<select class="form-control" ng-model="albumSelected" ng-click="getAlbum()" ng-change="refresh(albumSelected)" style="width: 20%;display: inline;">
 						  <option ng-repeat="v in albumList" value="{{v.albumName}}">{{v.albumName}}</option>  
 						</select>
-						<button type="button" class="btn btn-primary btn-s" ng-click="refresh(albumSelected)" ng-disabled="!albumSelected" style="width: 20%">
-	                        <span class="glyphicon glyphicon-refresh"></span> 刷新
-	                    </button>
 	                    <button type="button" class="btn btn-success btn-s" style="width: 20%" data-toggle="modal" data-target="#addAlbumModal">
 	                        <span class="glyphicon glyphicon-plus"></span> 新增专辑
 	                    </button>
+	                    <button type="button" class="btn btn-warning btn-s" style="width: 20%" data-toggle="modal" data-target="#deleteAlbumModal">
+	                        <span class="glyphicon glyphicon-trash"></span> 删除专辑
+	                    </button>
 	                    </br>
+	                    <div class="alert alert-success" ng-show="deleteSuccess" style="margin-top:10px">{{deleteAlbumInfo}}</div>
+	                    <div class="alert alert-danger" ng-show="deleteFail" style="margin-top:10px">{{deleteAlbumInfo}}</div>
 	                    <div style="height:600px;overflow: auto;">
 						<table class="table" style="width:100%;table-layout: fixed;">
 	                        <thead>
@@ -219,7 +221,8 @@
 		               	新建专辑
 		            </h4>
 		         </div>
-		        <input ng-model="addedAlbumName" type="text" placeholder="在此输入专辑的名称" style="width: 100% auto"></input> 
+		         	新专辑名:
+		        <input ng-model="addedAlbumName" type="text" placeholder="在此输入专辑的名称" style="width: 300px auto;margin-left: 10px;margin-top: 10px;margin-bottom: 10px"></input> 
 		         <div class="modal-footer">
 		            <button type="button" class="btn btn-default" 
 		               data-dismiss="modal">取消
@@ -232,6 +235,37 @@
 		         </div>
 		      </div><!-- /.modal-content -->
 		</div><!-- /.modal -->
-		</div>	
+		</div>
+		
+		<div class="modal fade" id="deleteAlbumModal" tabindex="-1" role="dialog" 
+		   aria-labelledby="myModalLabel" aria-hidden="true">
+		   <div class="modal-dialog">
+		      <div class="modal-content">
+		         <div class="modal-header">
+		            <button type="button" class="close" 
+		               data-dismiss="modal" aria-hidden="true">
+		                  &times;
+		            </button>
+		            <h4 class="modal-title" id="myModalLabel">
+		               	新建专辑
+		            </h4>
+		         </div>
+		       			 选择专辑:
+						<select class="form-control" ng-model="deleteAlbumSelected" ng-click="getAlbum()" style="width: 90%;display: inline;margin-left: 5%;margin-top: 10px;margin-bottom: 10px">
+						  <option ng-repeat="v in albumList" value="{{v.albumName}}">{{v.albumName}}</option>  
+						</select> 
+		         <div class="modal-footer">
+		            <button type="button" class="btn btn-default" 
+		               data-dismiss="modal">取消
+		            </button>
+	            
+					<button type="button" class="btn btn-primary" ng-click="deleteAlbum(deleteAlbumSelected)" data-dismiss="modal">
+		               	删除
+		         	</button>
+
+		         </div>
+		      </div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+		</div>
     </body>
 </html>

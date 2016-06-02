@@ -21,6 +21,13 @@ services.push({
     handler: handler.getAlbums
 });
 
+//删除一个专辑
+services.push({
+    type: 'post',
+    url: '/deleteAlbum',
+    handler: handler.deleteAlbum
+});
+
 //添加一张图片
 services.push({
     type: 'post',

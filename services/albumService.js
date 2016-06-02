@@ -28,7 +28,31 @@ service.addAlbum = function(req, res){
 //获取所有album
 service.getAlbums = function(req, res){
     Album.schema.find().execAsync().then(function(bars){
-		service.restSuccess(res, bars);	
+    	var albums = JSON.parse(JSON.stringify(bars));
+		service.restSuccess(res, {albums:albums,len:albums.length});	
+    }).catch(function(e){
+        //error(e.stack || e);
+        service.restError(res, -1, e.stack);
+    });
+}
+
+//添加一个album
+service.deleteAlbum = function(req, res){
+	var albumName = req.body.albumName;
+	var albumArray = new Array();
+	albumArray.push(albumName);
+    Image.schema.count({albums: {$in:albumArray}}).execAsync().then(function(num){
+		if(num!=0){
+			service.restError(res, -1, '专辑内尚有图片，请删除图片再试');
+			}else{
+				if(albumName == 'upload'){
+					service.restError(res, -1, '不能删除专辑 upload ');
+					}else{
+						Album.schema.remove({albumName:albumName}).execAsync().then(function(data){
+							service.restSuccess(res, '删除成功');	
+							});
+						}
+				}  
     }).catch(function(e){
         //error(e.stack || e);
         service.restError(res, -1, e.stack);
@@ -56,7 +80,8 @@ service.getImages = function(req, res){
 	albums.push(album);
 	var condition = {albums:{$in:albums}};
     Image.schema.find(condition).execAsync().then(function(bars){
-		service.restSuccess(res, {imgs:bars,len:bars.length});	
+    	var images = JSON.parse(JSON.stringify(bars));
+		service.restSuccess(res, {imgs:images,len:images.length});	
     }).catch(function(e){
         //error(e.stack || e);
         service.restError(res, -1, e.stack);
