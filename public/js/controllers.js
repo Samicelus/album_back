@@ -1,5 +1,5 @@
 'use strict';
-
+var host_ip = "119.29.92.190";
 
 angular
 
@@ -14,7 +14,7 @@ angular
     	$scope.refresh = function(albumName){
     		$scope.getAlbum();
     		$scope.images = new Array();
-			$http.get("http://localhost:8044/album/getImages?album="+albumName).then(function (response) {
+			$http.get("http://"+host_ip+":8044/album/getImages?album="+albumName).then(function (response) {
 				var imageList = response.data.data.imgs;
 				for(var i in imageList){
 					var imageObj = imageList[i];
@@ -33,7 +33,7 @@ angular
     		$scope.addedAlbumName = "";
  			$http({
 				method:'post',
-				url:'http://127.0.0.1:8044/album/addAlbum',
+				url:'http://'+host_ip+':8044/album/addAlbum',
 				data:{albumName:albumName}
 				}).success(function(res){
 					$scope.getAlbum();
@@ -43,7 +43,7 @@ angular
 		$scope.deleteAlbum = function(albumName){
  			$http({
 				method:'post',
-				url:'http://127.0.0.1:8044/album/deleteAlbum',
+				url:'http://'+host_ip+':8044/album/deleteAlbum',
 				data:{albumName:albumName}
 				}).success(function(res){
 					$scope.getAlbum();
@@ -73,7 +73,7 @@ angular
     		}
 
      	$scope.getAlbum = function(){
-			$http.get("http://localhost:8044/album/getAlbums").then(function (response) {
+			$http.get("http://'+host_ip+':8044/album/getAlbums").then(function (response) {
 				$scope.albumList = response.data.data.albums;
 				console.info($scope.albumList);
 				});			
@@ -82,7 +82,7 @@ angular
      	$scope.addImageToAlbum = function(id,albumName){
 			$http({
 				method:'post',
-				url:'http://127.0.0.1:8044/album/addImageToAlbum',
+				url:'http://'+host_ip+':8044/album/addImageToAlbum',
 				data:{img_id:id ,album:albumName}
 				}).success(function(res){
 					console.info(res);
@@ -93,7 +93,7 @@ angular
       	$scope.removeImageFromAlbum = function(id,albumName){
 			$http({
 				method:'post',
-				url:'http://127.0.0.1:8044/album/removeImageFromAlbum',
+				url:'http://'+host_ip+':8044/album/removeImageFromAlbum',
 				data:{img_id:id ,album:albumName}
 				}).success(function(res){
 					$scope.refresh(albumName);
@@ -104,7 +104,7 @@ angular
       	$scope.changeAlt = function(id,alt){
 			$http({
 				method:'post',
-				url:'http://127.0.0.1:8044/album/changeAlt',
+				url:'http://'+host_ip+':8044/album/changeAlt',
 				data:{img_id:id ,alt:alt}
 			}).success(function(res){
 					console.info(res);
@@ -119,7 +119,7 @@ angular
 
 
         var uploader = $scope.uploader = new FileUploader({
-            url: 'http://127.0.0.1:8044/album/uploading'
+            url: 'http://'+host_ip+':8044/album/uploading'
         });
 	
 
