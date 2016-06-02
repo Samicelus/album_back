@@ -73,7 +73,7 @@ angular
     		}
 
      	$scope.getAlbum = function(){
-			$http.get("http://'+host_ip+':8044/album/getAlbums").then(function (response) {
+			$http.get("http://"+host_ip+":8044/album/getAlbums").then(function (response) {
 				$scope.albumList = response.data.data.albums;
 				console.info($scope.albumList);
 				});			

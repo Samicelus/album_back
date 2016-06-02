@@ -13,7 +13,7 @@ angular
     	$scope.carouselLen = 0;
     	$scope.refresh = function(albumName){
     		$scope.images = [];
-			$http.get("http://localhost:8044/album/getImages?album="+albumName).then(function (response) {
+			$http.get("http://"+host_ip+":8044/album/getImages?album="+albumName).then(function (response) {
 				var imageList = response.data.data.imgs;
 				$scope.index = 0;
 				$scope.carouselLen = imageList.length;
