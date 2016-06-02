@@ -57,7 +57,14 @@
 							<div ng-repeat="y in images" id="{{y.divId}}" ng-style={"width":y.width,"margin-top":y.marginTop} style="height:400px"><img class="myImg" src="{{y.imageURL}}" ng-style={"width":y.childrenWidth,"transform":y.rotation} ng-click="modalDisplay(y)"></img></div>
 						  </div>
 						</div>
-						<div class="button"><button ng-click="pre()">上一张</button><button ng-click="next()">下一张</button></div>
+						<div class="button">
+							<button style="margin-top:2px" type="button" class="btn btn-info btn-s" ng-click="pre()">
+			                            <span class="glyphicon glyphicon-chevron-left"></span> 上一张
+			                </button>
+			                <button style="margin-top:2px" type="button" class="btn btn-info btn-s" ng-click="next()">
+			                            <span class="glyphicon glyphicon-chevron-right"></span> 下一张
+			                </button>
+						</div>
 					</div>
 				</div>
   		 	</div>
