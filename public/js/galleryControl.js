@@ -18,13 +18,13 @@ angular
 				$scope.index = 0;
 				$scope.carouselLen = imageList.length;
 				$scope.carouselWidth = $scope.carouselLen*600 +"px";
-				$scope.carouselLeft = "400px";
+				$scope.carouselLeft = "200px";
 				for(var i in imageList){
 					var imageObj = imageList[i];
 					imageObj.width = "400px";
 					if(i == 0){
 						imageObj.childrenWidth = "112%";
-						imageObj.marginTop = "20px";
+						imageObj.marginTop = "70px";
 						imageObj.rotation = "rotate3d(1,1,0,0deg)";
 						}else{
 							imageObj.childrenWidth = "100%";
@@ -59,9 +59,9 @@ angular
 	     		$scope.images[$scope.index+1].marginTop = "0px";
 	     		$scope.images[$scope.index+1].rotation = "rotate3d(-0.5,1,0,-60deg)";
 	     		$scope.images[$scope.index].childrenWidth = "112%";
-	     		$scope.images[$scope.index].marginTop = "20px";
+	     		$scope.images[$scope.index].marginTop = "70px";
 	     		$scope.images[$scope.index].rotation = "rotate3d(1,1,0,0deg)";
-	     		$scope.carouselLeft =  400-$scope.index*400+"px";	
+	     		$scope.carouselLeft =  200-$scope.index*400+"px";	
 	     		}
     		}
 
@@ -72,9 +72,9 @@ angular
 	     		$scope.images[$scope.index-1].marginTop = "0px";
 	     		$scope.images[$scope.index-1].rotation = "rotate3d(0.5,1,0,60deg)";
 	     		$scope.images[$scope.index].childrenWidth = "112%";
-	     		$scope.images[$scope.index].marginTop = "20px";
+	     		$scope.images[$scope.index].marginTop = "70px";
 	     		$scope.images[$scope.index].rotation = "rotate3d(1,1,0,0deg)";
-	     		$scope.carouselLeft =  400-$scope.index*400+"px";
+	     		$scope.carouselLeft =  200-$scope.index*400+"px";
 	     		}
     		}
 
