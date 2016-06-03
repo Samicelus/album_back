@@ -34,20 +34,19 @@
 .modal-content {
     margin: auto;
     display: block;
-    width: 80%;
-    max-width: 700px;
+    width: 120%;
+    max-width: 1920px;
 }
 
 /* Caption of Modal Image */
 #caption {
     margin: auto;
     display: block;
-    width: 80%;
-    max-width: 700px;
+    width: 120%;
+    max-width: 1920px;
     text-align: center;
     color: #ccc;
     padding: 10px 0;
-    height: 150px;
 }
 
 /* Add Animation */
