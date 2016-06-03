@@ -1,13 +1,8 @@
 'use strict';
 var host_ip = "119.29.92.190";
 
-angular
-
-
-    .module('app', ['angularFileUpload','ngAnimate','ui.bootstrap'])
-
-
-    .controller('AppController', ['$scope','FileUploader','$http', function($scope, FileUploader,$http) {
+angular.module('app', ['angularFileUpload','ngAnimate','ui.bootstrap'])
+.controller('AppController', ['$scope','FileUploader','$http', function($scope, FileUploader,$http) {
     	$scope.images = new Array();
     	$scope.index = 0;
     	$scope.carouselLen = 0;
@@ -23,13 +18,17 @@ angular
 					var imageObj = imageList[i];
 					imageObj.width = "400px";
 					if(i == 0){
-						imageObj.childrenWidth = "112%";
-						imageObj.marginTop = "70px";
+						imageObj.childrenWidth = "160%";
+						imageObj.marginTop = "20px";
 						imageObj.rotation = "rotate3d(1,1,0,0deg)";
+						imageObj.indexZ = "0";
+						imageObj.marginL = "-30%";
 						}else{
-							imageObj.childrenWidth = "100%";
-							imageObj.marginTop = "0px";
-							imageObj.rotation = "rotate3d(-0.5,1,0,-60deg)";
+							imageObj.childrenWidth = "70%";
+							imageObj.marginTop = "70px";
+							imageObj.rotation = "rotate3d(-0.66,-0.95,0,-0deg)";
+							imageObj.indexZ = "-1";
+							imageObj.marginL = "15%";
 							}
 					imageObj.divId = "img"+i;
 					$scope.images.push(imageObj);
@@ -55,12 +54,16 @@ angular
      	$scope.pre = function(){
      		if($scope.carouselLen > 1){
 	     		$scope.index = $scope.index != 0?$scope.index-1:0;
-				$scope.images[$scope.index+1].childrenWidth = "100%";
-	     		$scope.images[$scope.index+1].marginTop = "0px";
-	     		$scope.images[$scope.index+1].rotation = "rotate3d(-0.5,1,0,-60deg)";
-	     		$scope.images[$scope.index].childrenWidth = "112%";
-	     		$scope.images[$scope.index].marginTop = "70px";
+				$scope.images[$scope.index+1].childrenWidth = "70%";
+	     		$scope.images[$scope.index+1].marginTop = "70px";
+	     		$scope.images[$scope.index+1].rotation = "rotate3d(-0.66,-0.95,0,-0deg)";
+	     		$scope.images[$scope.index+1].indexZ = "-1";
+	     		$scope.images[$scope.index+1].marginL = "15%";
+	     		$scope.images[$scope.index].childrenWidth = "160%";
+	     		$scope.images[$scope.index].marginTop = "20px";
 	     		$scope.images[$scope.index].rotation = "rotate3d(1,1,0,0deg)";
+	     		$scope.images[$scope.index].indexZ = "0";
+	     		$scope.images[$scope.index].marginL = "-30%";
 	     		$scope.carouselLeft =  200-$scope.index*400+"px";	
 	     		}
     		}
@@ -68,16 +71,28 @@ angular
      	$scope.next = function(){
      		if($scope.carouselLen > 1){
 	      		$scope.index = ($scope.index != ($scope.carouselLen-1))?$scope.index+1:$scope.carouselLen-1;
-	     		$scope.images[$scope.index-1].childrenWidth = "100%";
-	     		$scope.images[$scope.index-1].marginTop = "0px";
-	     		$scope.images[$scope.index-1].rotation = "rotate3d(0.5,1,0,60deg)";
-	     		$scope.images[$scope.index].childrenWidth = "112%";
-	     		$scope.images[$scope.index].marginTop = "70px";
+	     		$scope.images[$scope.index-1].childrenWidth = "70%";
+	     		$scope.images[$scope.index-1].marginTop = "70px";
+	     		$scope.images[$scope.index-1].rotation = "rotate3d(0.66,-0.95,0,0deg)";
+	     		$scope.images[$scope.index-1].indexZ = "-1";
+	     		$scope.images[$scope.index-1].marginL = "15%";
+	     		$scope.images[$scope.index].childrenWidth = "160%";
+	     		$scope.images[$scope.index].marginTop = "20px";
 	     		$scope.images[$scope.index].rotation = "rotate3d(1,1,0,0deg)";
+	     		$scope.images[$scope.index].indexZ = "0";
+	     		$scope.images[$scope.index].marginL = "-30%";
 	     		$scope.carouselLeft =  200-$scope.index*400+"px";
 	     		}
     		}
 
+     	$scope.refreshPage = function(pageName){
+			$http.get("http://"+host_ip+":8044/page/getPageConfig?pageName="+pageName).then(function (response) {
+				$scope.pageConfig = response.data.data;
+				$scope.pageSelected = true;
+				});
+    		}
+		$scope.refreshPage('galleryPage');
+		
      	$scope.getAlbum = function(){
 			$http.get("http://"+host_ip+":8044/album/getAlbums").then(function (response) {
 				var rst = response.data.data.albums;

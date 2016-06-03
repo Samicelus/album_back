@@ -45,7 +45,7 @@
 		<div class="container">
             <div class="row">
             	<div class="col-xs-12" id="galleriesTab">
-					<p>画廊</p>
+					<p>{{pageConfig.title}}</p>
 					<ul class="nav nav-tabs">
 						<li style="display:inline" ng-repeat="x in albumList"><a ng-click="refresh(x.albumName)">{{x.albumName}}</a></li>
 					</ul>
@@ -54,7 +54,7 @@
 					<div class="album">
 						<div class="wrap">
 						  <div class="carousel" ng-style={width:carouselWidth,left:carouselLeft}>
-							<div ng-repeat="y in images" id="{{y.divId}}" ng-style={"width":y.width,"margin-top":y.marginTop} style="height:400px"><img class="myImg" src="{{y.imageURL}}" ng-style={"width":y.childrenWidth,"transform":y.rotation} ng-click="modalDisplay(y)"></img></div>
+							<div ng-repeat="y in images" id="{{y.divId}}" ng-style={"width":y.width,"margin-top":y.marginTop} style="height:400px"><img class="myImg" src="{{y.imageURL}}" ng-style={"width":y.childrenWidth,"transform":y.rotation,"z-index":y.indexZ,"margin-left":y.marginL} ng-click="modalDisplay(y)"></img></div>
 						  </div>
 						</div>
 						<div class="button">

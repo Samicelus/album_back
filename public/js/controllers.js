@@ -1,16 +1,14 @@
 'use strict';
 var host_ip = "119.29.92.190";
 
-angular
-
-
-    .module('app', ['angularFileUpload','ngAnimate','ui.bootstrap'])
-
-
-    .controller('AppController', ['$scope','FileUploader','$http','$timeout', function($scope, FileUploader,$http, $timeout) {
+angular.module('app', ['angularFileUpload','ngAnimate','ui.bootstrap'])
+.controller('AppController', ['$scope','FileUploader','$http','$timeout', function($scope, FileUploader,$http, $timeout) {
+		$scope.addedFile = false;
     	$scope.deleteSuccess = false;
 		$scope.deleteFail = false;
     	$scope.images = new Array();
+    	$scope.pages = new Array();
+    	$scope.pageConfig = new Object();
     	$scope.refresh = function(albumName){
     		$scope.getAlbum();
     		$scope.images = new Array();
@@ -27,8 +25,21 @@ angular
 					}
 				});
     	}
-    	
-     	
+ 
+     	$scope.refreshPage = function(pageName){
+			$http.get("http://"+host_ip+":8044/page/getPageConfig?pageName="+pageName).then(function (response) {
+				$scope.pageConfig = response.data.data;
+				$scope.pageSelected = true;
+				});
+    		}
+ 
+    	$scope.getPages = function(){
+			$http.get("http://"+host_ip+":8044/page/getPages").then(function (response) {
+				$scope.pages = response.data.data.pages;
+				console.info($scope.pages);
+				});
+    		}
+
     	$scope.addAlbum = function(albumName){
     		$scope.addedAlbumName = "";
  			$http({
@@ -112,17 +123,19 @@ angular
     		}
 
 		$scope.getAlbum();
+		$scope.getPages();
+		
 		$scope.status = {
 			isUploadOpen: false,
-			isUpListOpen: false
+			isUpListOpen: false,
+			isPageConfigOpen: false
 			};
 
 
         var uploader = $scope.uploader = new FileUploader({
             url: 'http://'+host_ip+':8044/album/uploading'
         });
-	
-
+        
         // FILTERS
         uploader.filters.push({
             name: 'imageFilter',
@@ -170,5 +183,16 @@ angular
             //console.info('onCompleteAll');
         };
 
-        //console.info('uploader', uploader);
+
+        //修改页面设置
+        $scope.modPageConfig = function(){
+			$http({
+				method:'post',
+				url:'http://'+host_ip+':8044/page/pageConfig',
+				data:{pageName:$scope.pageConfig.pageName,title:$scope.pageConfig.title}
+				}).success(function(res){
+					console.info(res);
+					});
+    		}	
+        
     }]);

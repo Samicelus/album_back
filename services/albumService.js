@@ -8,6 +8,10 @@ var path = require('path');
 var Album = require('../models/album.js');
 var Image = require('../models/image.js');
 
+
+var serverConfig = require(utils.configDir + '/server.json');
+var serverIP = serverConfig.ip;
+
 //添加一个album
 service.addAlbum = function(req, res){
 	var albumName = req.body.albumName; 
@@ -176,7 +180,7 @@ service.uploading = function(req, res){
 	var orgFilename = req.body.file.name;
 	var savedFileName = orgFilename;
 	var dstPath = './public/files/'+ savedFileName;
-	var server = '119.29.92.190:8044';
+	var server = serverIP+':8044';
 	var fileUrl = server+dstPath;
 	//重命名为真实文件名
 	fs.rename(uploadedPath, dstPath,function(err){

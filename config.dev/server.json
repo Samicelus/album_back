@@ -1,4 +1,5 @@
 {
+  "ip":"119.29.92.190",
   "port":8044,
   "jwtSecret": "@#$TYHBVGHJIY^TWEYKJHNBGFDWGHJKUYTWE#$%^&*&^%$#",
   "need_encrypt":false,
