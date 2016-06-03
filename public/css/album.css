@@ -35,7 +35,7 @@
     margin: auto;
     display: block;
     width: 120%;
-    max-width: 1920px;
+    max-width: 1024px;
 }
 
 /* Caption of Modal Image */
@@ -43,7 +43,7 @@
     margin: auto;
     display: block;
     width: 120%;
-    max-width: 1920px;
+    max-width: 1024px;
     text-align: center;
     color: #ccc;
     padding: 10px 0;
