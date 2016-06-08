@@ -6,6 +6,13 @@ angular.module('app', [])
     	$scope.images = new Array();
     	$scope.refresh = function(albumName){
     		$scope.images = [];
+    		for(var i in $scope.albumList){
+					if($scope.albumList[i].albumName ==albumName){
+						$scope.albumList[i].albumClass == "active";
+						}else{
+							$scope.albumList[i].albumClass == "";
+							}
+					}
 			$http.get("http://"+host_ip+":8044/album/getImages?album="+albumName).then(function (response) {
 				var imageList = response.data.data.imgs;
 				for(var i in imageList){
@@ -45,6 +52,12 @@ angular.module('app', [])
 				$scope.albumList = new Array();
 				for(var i in rst){
 					if(rst[i].albumName != "upload"){
+						if(i == 0){
+							rst[i].albumClass = "active";	
+							}else{
+								rst[i].albumClass = "";	
+								}
+						rst[i].albumTabId = "album"+i;
 						$scope.albumList.push(rst[i]);
 						}
 					}
@@ -57,7 +70,7 @@ angular.module('app', [])
 				method:'post',
 				url:'http://'+host_ip+':8044/album/changeAlt',
 				data:{img_id:id ,alt:alt}
-			}).success(function(res){
+				}).success(function(res){
 					console.info(res);
 					});
     		}

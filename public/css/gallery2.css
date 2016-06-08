@@ -41,7 +41,10 @@
 	margin-left: 160px;
 	margin-top: 102px;
 	width: 0%;
-	height: 0%;	
+	height: 0%;
+	-webkit-transform: rotateX(360deg);
+	-moz-transform: rotate(360deg);
+	-o-transform: rotate(-360deg);
 }
 
 .imgWrap:hover .myImg{
@@ -50,10 +53,6 @@
 	top: 2px;
 	box-shadow: 6px 3px 5px #C9C9C9;
 	opacity: 1;
-	-webkit-transform:scale(1.8);
-	-moz-transform:scale(1.8);	
-	-o-transform:scale(1.8);
-	z-index:200;
 }
 
 /* The Modal (background) */
