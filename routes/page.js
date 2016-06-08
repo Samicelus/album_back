@@ -21,6 +21,13 @@ services.push({
     handler: handler.galleryPage
 });
 
+//render galleryPage
+services.push({
+    type: 'get',
+    url: '/galleryPage2',
+    handler: handler.galleryPage2
+});
+
 //pageConfig
 services.push({
     type: 'post',

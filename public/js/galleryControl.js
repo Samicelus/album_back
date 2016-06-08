@@ -126,7 +126,7 @@ angular.module('app', ['angularFileUpload','ngAnimate','ui.bootstrap'])
 					$scope.refresh(albumName);
 					console.info(res);
 					});
-    		}
+    	}
 
       	$scope.changeAlt = function(id,alt){
 			$http({
