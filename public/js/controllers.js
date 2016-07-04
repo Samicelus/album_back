@@ -1,5 +1,5 @@
 'use strict';
-var host_ip = "119.29.92.190";
+var host_ip = "127.0.0.1";
 
 angular.module('app', ['angularFileUpload','ngAnimate','ui.bootstrap'])
 .controller('AppController', ['$scope','FileUploader','$http','$timeout', function($scope, FileUploader,$http, $timeout) {
@@ -133,7 +133,8 @@ angular.module('app', ['angularFileUpload','ngAnimate','ui.bootstrap'])
 
 
         var uploader = $scope.uploader = new FileUploader({
-            url: 'http://'+host_ip+':8044/album/uploading'
+            url: 'http://'+host_ip+':8044/album/uploading',
+            headers : {'openid':'abcdefg'}
         });
         
         // FILTERS
