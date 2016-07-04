@@ -134,7 +134,7 @@ angular.module('app', ['angularFileUpload','ngAnimate','ui.bootstrap'])
 
         var uploader = $scope.uploader = new FileUploader({
             url: 'http://'+host_ip+':8044/album/uploading',
-            headers : {'openid':'abcdefg'}
+            headers : {'openid':$scope.toAlbum}
         });
         
         // FILTERS
