@@ -4,7 +4,6 @@ var service = new BaseService();
 var Promise = require('bluebird');
 var fs = Promise.promisifyAll(require('fs'));
 var path = require('path');
-
 var Album = require('../models/album.js');
 var Image = require('../models/image.js');
 
@@ -22,7 +21,7 @@ service.addAlbum = function(req, res){
 				new Album.schema({albumName:albumName}).saveAsync().then(function(data){
 					service.restSuccess(res, data);	
 					});
-				}  
+				}
     }).catch(function(e){
         //error(e.stack || e);
         service.restError(res, -1, e.stack);
@@ -56,12 +55,28 @@ service.deleteAlbum = function(req, res){
 							service.restSuccess(res, '删除成功');	
 							});
 						}
-				}  
+				}
     }).catch(function(e){
         //error(e.stack || e);
         service.restError(res, -1, e.stack);
     });
 }
+
+//修改专辑排序
+service.changeAlbumOrder = function(req, res){
+	var albumName = req.body.albumName;
+	var order = req.body.order;
+    Album.schema.update({albumName:albumName},{$set:{order:order}}).execAsync().then(function(result){
+		console.log("ok:"+result.ok);
+		console.log("nModified:"+result.nModified);
+		console.log("n:"+result.n);
+		service.restSuccess(res, '修改成功');	
+    }).catch(function(e){
+        //error(e.stack || e);
+        service.restError(res, -1, e.stack);
+    });
+}
+
 
 //添加一个图片
 service.addImage = function(req, res){
@@ -178,6 +193,8 @@ service.uploading = function(req, res){
   // don't forget to delete all req.files when done
 	var uploadedPath = req.body.file.path;
 	var orgFilename = req.body.file.name;
+	var options = req.body.file.options;
+	console.log('options:'+options);
 	var savedFileName = orgFilename;
 	var dstPath = './public/files/'+ savedFileName;
 	var server = serverIP+':8044';
@@ -196,7 +213,7 @@ service.uploading = function(req, res){
 					saveObj.alt = savedFileName.slice(0,savedFileName.lastIndexOf('.'))
 					saveObj.albums = ['upload'];
 					new Image.schema(saveObj).saveAsync().then(function(data){
-						service.restSuccess(res, 'file saved');	
+						service.restSuccess(res, data);	
 						});	
 					});
 				}	

@@ -18,6 +18,10 @@ service.galleryPage2 = function(req, res){
 	res.render('gallery2', { title: '图片库2' });
 	}
 
+service.font_test = function(req, res){
+	res.render('font_test', { title: '字体测试' });
+	}
+
 service.pageConfig = function(req, res){
 	var pageName = req.body.pageName;
 	var title = req.body.title; 

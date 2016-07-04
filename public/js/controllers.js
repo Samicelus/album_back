@@ -21,7 +21,7 @@ angular.module('app', ['angularFileUpload','ngAnimate','ui.bootstrap'])
 						$scope.images.push(imageObj);						
 						}else{
 							console.info(typeof(imageObj));
-						}
+							}
 					}
 				});
     	}

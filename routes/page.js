@@ -28,6 +28,13 @@ services.push({
     handler: handler.galleryPage2
 });
 
+//render galleryPage
+services.push({
+    type: 'get',
+    url: '/font_test',
+    handler: handler.font_test
+});
+
 //pageConfig
 services.push({
     type: 'post',

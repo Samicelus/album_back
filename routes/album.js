@@ -70,6 +70,13 @@ services.push({
     handler: handler.changeAlt
 });
 
+//修改专辑排序
+services.push({
+    type: 'post',
+    url: '/changeAlbumOrder',
+    handler: handler.changeAlbumOrder
+});
+
 
 //上传图片
 services.push({
