@@ -194,6 +194,7 @@ service.uploading = function(req, res){
 	var uploadedPath = req.body.file.path;
 	var orgFilename = req.body.file.name;
 	var openid = req.headers.openid;
+	console.log(openid);
 	var savedFileName = orgFilename;
 	var dstPath = './public/files/'+ savedFileName;
 	var server = serverIP+':8044';

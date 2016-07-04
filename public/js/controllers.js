@@ -1,5 +1,5 @@
 'use strict';
-var host_ip = "127.0.0.1";
+var host_ip = "119.29.92.190";
 
 angular.module('app', ['angularFileUpload','ngAnimate','ui.bootstrap'])
 .controller('AppController', ['$scope','FileUploader','$http','$timeout', function($scope, FileUploader,$http, $timeout) {
