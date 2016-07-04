@@ -104,7 +104,7 @@
 		                                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
 		                                </td>
 		                                <td>
-			                                <select class="form-control" ng-model="toAlbum" ng-click="getAlbum()" style="width: 114px">
+			                                <select class="form-control" ng-model="item.file.toAlbum" ng-click="getAlbum()" style="width: 114px">
 											  <option ng-repeat="v in albumList" value="{{v.albumName}}">{{v.albumName}}</option>  
 											</select>
 										</td>

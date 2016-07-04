@@ -193,8 +193,10 @@ service.uploading = function(req, res){
   // don't forget to delete all req.files when done
 	var uploadedPath = req.body.file.path;
 	var orgFilename = req.body.file.name;
+	var toAlbum = req.body.file.toAlbum;
+	console.log("toAlbum:"+toAlbum);
 	var openid = req.headers.openid;
-	console.log(openid);
+	console.log("openid:"+openid);
 	var savedFileName = orgFilename;
 	var dstPath = './public/files/'+ savedFileName;
 	var server = serverIP+':8044';
@@ -211,7 +213,7 @@ service.uploading = function(req, res){
 					var saveObj = new Object();
 					saveObj.imageURL = 'http://'+server+'/files/'+savedFileName;
 					saveObj.alt = savedFileName.slice(0,savedFileName.lastIndexOf('.'))
-					saveObj.albums = ['upload',openid];
+					saveObj.albums = ['upload',toAlbum];
 					new Image.schema(saveObj).saveAsync().then(function(data){
 						service.restSuccess(res, data);	
 						});	

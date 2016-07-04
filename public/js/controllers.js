@@ -3,6 +3,7 @@ var host_ip = "119.29.92.190";
 
 angular.module('app', ['angularFileUpload','ngAnimate','ui.bootstrap'])
 .controller('AppController', ['$scope','FileUploader','$http','$timeout', function($scope, FileUploader,$http, $timeout) {
+		$scope.openid = "user's openid";
 		$scope.addedFile = false;
     	$scope.deleteSuccess = false;
 		$scope.deleteFail = false;
@@ -134,7 +135,7 @@ angular.module('app', ['angularFileUpload','ngAnimate','ui.bootstrap'])
 
         var uploader = $scope.uploader = new FileUploader({
             url: 'http://'+host_ip+':8044/album/uploading',
-            headers : {'openid':$scope.toAlbum}
+            headers : {'openid':$scope.openid}
         });
         
         // FILTERS
