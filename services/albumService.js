@@ -196,7 +196,7 @@ service.uploading = function(req, res){
 	var openid = req.headers.openid;
 	console.log("openid:"+openid);
 	var savedFileName = orgFilename;
-	var dstPath = './public/files/'+ savedFileName;
+	var dstPath = './public/files/'+openid+'/'+savedFileName;
 	var server = serverIP+':8044';
 	var fileUrl = server+dstPath;
 	//重命名为真实文件名
@@ -209,7 +209,7 @@ service.uploading = function(req, res){
 				fs.unlink(uploadedPath,function(){
 					//下面往数据库中存储url
 					var saveObj = new Object();
-					saveObj.imageURL = 'http://'+server+'/files/'+savedFileName;
+					saveObj.imageURL = 'http://'+server+'/files/'+openid+'/'+savedFileName;
 					saveObj.alt = savedFileName.slice(0,savedFileName.lastIndexOf('.'))
 					saveObj.albums = ['upload',openid];
 					new Image.schema(saveObj).saveAsync().then(function(data){
