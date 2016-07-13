@@ -14,6 +14,12 @@ services.push({
     handler: handler.uploadPage
 });
 
+services.push({
+    type: 'get',
+    url: '/uploadimg',
+    handler: handler.uploadimg
+});
+
 //render galleryPage
 services.push({
     type: 'get',

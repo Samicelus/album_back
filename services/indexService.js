@@ -10,6 +10,10 @@ service.uploadPage = function(req, res){
 	res.render('upload', { title: '上传测试代码' });
 	}
 
+service.uploadPage = function(req, res){
+	res.render('uploadimg', { title: '上传图片' });
+	}
+
 service.galleryPage = function(req, res){
 	res.render('gallery', { title: '图片库' });
 	}
