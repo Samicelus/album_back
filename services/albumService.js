@@ -222,21 +222,24 @@ service.uploading = function(req, res){
 
 //上传amr
 service.uploadAmr = function(req, res){
-	
-	var bodyData = req.body;
-	for(var i in bodyData){
-		console.log("body:"+i+":"+bodyData[i]);
-	}
-	var headerData = req.headers;
-	for(var j in headerData){
-		console.log("header:"+j+":"+headerData[j]);
-	}
-	
-	var keyObj = bodyData.testkey;
-	for(var k in keyObj){
-		console.log("keyObj:"+k+":"+keyObj[k]);
-	}
-	
+	var fileData = req.body.file;
+	var uploadedPath = fileData.path;
+	var fileName = fileData.name+".amr";
+	var dstPath = './public/files/upfile/'+fileName;
+	var server = serverIP+':8044';
+	fs.rename(uploadedPath, dstPath,function(err){
+		if(err){
+			fs.unlink(uploadedPath,function(){
+				service.restError(res, -1, 'rename error: '+err);
+				});
+			}else{
+				fs.unlink(uploadedPath,function(){
+					//下面往数据库中存储url
+					var URL = 'http://'+server+'/files/upfile/'+fileName;
+					service.restSuccess(res, {url:URL});	
+					});
+				}	
+		});
 	/*
   // don't forget to delete all req.files when done
 	var uploadedPath = req.body.file.path;
