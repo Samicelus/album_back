@@ -86,6 +86,14 @@ services.push({
     handler: handler.uploading
 });
 
+//上传图片
+services.push({
+    type: 'post',
+    url: '/uploadAmr',
+    middleware:formidableMiddleware,
+    handler: handler.uploadAmr
+});
+
 class Router extends BaseRouter{
     constructor(server,name) {
         super(server,name); //执行父类BaseRouter的构造函数

@@ -220,4 +220,48 @@ service.uploading = function(req, res){
 		});
 	}
 
+//上传amr
+service.uploadAmr = function(req, res){
+	
+	var bodyData = req.body;
+	for(var i in bodyData){
+		console.log("body:"+i+":"+bodyData[i]);
+	}
+	var headerData = req.headers;
+	for(var j in headerData){
+		console.log("header:"+j+":"+headerData[j]);
+	}
+	/*
+  // don't forget to delete all req.files when done
+	var uploadedPath = req.body.file.path;
+	var orgFilename = req.body.file.name;
+	var openid = req.headers.openid;
+	console.log("openid:"+openid);
+	var savedFileName = orgFilename;
+	var dstPath = './public/files/'+openid+'/'+savedFileName;
+	var server = serverIP+':8044';
+	var fileUrl = server+dstPath;
+	//重命名为真实文件名
+	fs.rename(uploadedPath, dstPath,function(err){
+		if(err){
+			fs.unlink(uploadedPath,function(){
+				service.restError(res, -1, 'rename error: '+err);
+				});
+			}else{
+				fs.unlink(uploadedPath,function(){
+					//下面往数据库中存储url
+					var saveObj = new Object();
+					saveObj.imageURL = 'http://'+server+'/files/'+openid+'/'+savedFileName;
+					saveObj.alt = savedFileName.slice(0,savedFileName.lastIndexOf('.'))
+					saveObj.albums = ['upload',openid];
+					new Image.schema(saveObj).saveAsync().then(function(data){
+						service.restSuccess(res, data);	
+						});	
+					});
+				}	
+		});
+		*/
+	}
+
+
 module.exports = service;
