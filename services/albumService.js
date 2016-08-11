@@ -224,8 +224,10 @@ service.uploading = function(req, res){
 service.uploadAmr = function(req, res){
 	var fileData = req.body.file;
 	var uploadedPath = fileData.path;
+	console.log("uploadedPath:"+uploadedPath);
 	var fileName = fileData.name+".amr";
 	var dstPath = './public/files/upfile/'+fileName;
+	console.log("dstPath:"+dstPath);
 	var server = serverIP+':8044';
 	fs.rename(uploadedPath, dstPath,function(err){
 		if(err){
