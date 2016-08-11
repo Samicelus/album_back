@@ -1,16 +1,9 @@
 {
-"dataServer":{
-	"host":"127.0.0.1",
-	"port":"27017",
-	"db":"album",
-	"user":"",
-	"pwd":""
-	},
-"dataServer2":{
-	"host":"127.0.0.1",
-	"port":"27018",
-	"db":"album",
-	"user":"",
-	"pwd":""
-	}
+  "dataServer":{
+	    "host":"10.66.150.215",
+	    "port":"27017",
+	    "db":"psy",
+	    "user":"rwuser",
+	    "pwd":"PzANZ306"
+	  }
 }
