@@ -90,7 +90,6 @@ services.push({
 services.push({
     type: 'post',
     url: '/uploadAmr',
-    middleware:formidableMiddleware,
     handler: handler.uploadAmr
 });
 
