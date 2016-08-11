@@ -226,10 +226,10 @@ service.uploadAmr = function(req, res){
 	var uploadedPath = "./"+fileData.path;
 	console.log("uploadedPath:"+uploadedPath);
 	var fileName = fileData.name+".amr";
-	var dstPath = './public/files/upfile/'+fileName;
+	var dstPath = './public/files/'+fileName;
 	console.log("dstPath:"+dstPath);
 	var server = serverIP+':8044';
-	fs.rename(uploadedPath, dstPath,function(err){
+	fs.rename(uploadedPath, dstPath, function(err){
 		if(err){
 			fs.unlink(uploadedPath,function(){
 				service.restError(res, -1, 'rename error: '+err);
@@ -237,7 +237,7 @@ service.uploadAmr = function(req, res){
 			}else{
 				fs.unlink(uploadedPath,function(){
 					//下面往数据库中存储url
-					var URL = 'http://'+server+'/files/upfile/'+fileName;
+					var URL = 'http://'+server+'/files/'+fileName;
 					console.log(URL);
 					service.restSuccess(res, {url:URL});	
 					});
