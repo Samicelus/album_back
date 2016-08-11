@@ -231,6 +231,12 @@ service.uploadAmr = function(req, res){
 	for(var j in headerData){
 		console.log("header:"+j+":"+headerData[j]);
 	}
+	
+	var keyObj = bodyData.testkey;
+	for(var k in keyObj){
+		console.log("keyObj:"+k+":"+keyObj[k]);
+	}
+	
 	/*
   // don't forget to delete all req.files when done
 	var uploadedPath = req.body.file.path;
